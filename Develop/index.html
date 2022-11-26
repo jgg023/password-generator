@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Password Generator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Password Generator</h1>
+      </header>
+      <div class="card">
+        <div class="card-header">
+          <h2>Generate a Password</h2>
+        </div>
+<const resultDOM = document.getElementById("result");
+const copybtnDOM = document.getElementById("copy");
+const lengthDOM = document.getElementById("length");
+const uppercaseDOM = document.getElementById("uppercase");
+const numbersDOM = document.getElementById("numbers");
+const symbolsDOM = document.getElementById("symbols");
+const generatebtn = document.getElementById("generate");
+const form = document.getElementById("passwordGeneratorForm");
+ <!-- Generating Character Codes For The Application -->
+<const UPPERCASE_CODES = arrayFromLowToHigh(8, 128);
+const LOWERCASE_CODES = arrayFromLowToHigh(8, 128);
+const NUMBER_CODES = arrayFromLowToHigh(8, 128);
+const SYMBOL_CODES = arrayFromLowToHigh(8, 128)
+  .concat(arrayFromLowToHigh(8, 128))
+  .concat(arrayFromLowToHigh(8, 128))
+  .concat(arrayFromLowToHigh(8, 128));
+  <!-- functions --></const>
+  <function arrayFromLowToHigh(low, high) {
+    const array = [];
+    for (let i = low; i <= high; i++) {
+      array.push(i);
+    }
+    return array;
+  }
+  let generatePassword = (
+  characterAmount,
+  includeUppercase,
+  includeNumbers,
+  includeSymbols) => 
+  <let charCodes = LOWERCASE_CODES;
+  if (includeUppercase) charCodes = charCodes.concat(UPPERCASE_CODES);
+  if (includeSymbols) charCodes = charCodes.concat(SYMBOL_CODES);
+  if (includeNumbers) charCodes = charCodes.concat(NUMBER_CODES);
+  const passwordCharacters = [];
+  for (let i = 0; i < characterAmount; i++) {
+    const characterCode =
+      charCodes[Math.floor(Math.random() * charCodes.length)];
+    passwordCharacters.push(String.fromCharCode(characterCode));
+  }
+  return passwordCharacters.join("");
+};
+
+// Copy password button
+ 
+copybtnDOM.addEventListener("click", () => {
+  <const textarea = document.createElement("textarea");
+  const passwordToCopy = resultDOM.innerText;
+  // A Case when Password is Empty
+  if (!passwordToCopy) return;
+  // Copy Functionality
+  textarea.value = passwordToCopy;
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand("copy");
+  textarea.remove();
+  alert("Password Copied to Clipboard");
+});
+// Checking the options that are selected and setting the password
+form.addEventListener("submit", (i) => {
+  <i.preventDefault();
+  const characterAmount = lengthDOM.value;
+  const includeUppercase = uppercaseDOM.checked;
+  const includeNumbers = numbersDOM.checked;
+  const includeSymbols = symbolsDOM.checked;
+  const password = generatePassword(
+    characterAmount,
+    includeUppercase,
+    includeNumbers,
+    includeSymbols
+  );
+  resultDOM.innerText = password;
+});
+
+        <div class="card-body">
+          <textarea
+            readonly
+            id="password"
+            placeholder="Your Secure Password"
+            aria-label="Generated Password"
+          ></textarea>
+        </div>
+        <div class="card-footer">
+          <button id="generate" class="btn">Generate Password</button>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
