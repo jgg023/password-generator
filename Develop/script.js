@@ -15,38 +15,50 @@ function generatePassword(){
   var passwordlink = window.prompt("How many Chararcters ");
   console.log(passwordlink);
 var uppercase = window.confirm ("Would you like to add uppercase ?")
-if (uppercase === true) {
-  // Add uppercase letters to options 
+if (uppercase === true) { 
+  // Add uppercase letters to options
+ options = options.concat(uc) ; 
   console.log(uppercase)
+  console.log(options)
 }
 
 
 var lowercase = window.confirm ("Would you like to add lowercase ?")
 if (lowercase === true){
-  // Add lowercase letters to options 
+  // Add lowercase letters to options
+  options = options.concat(lc) ; 
   console.log (lowercase)
+  console.log(options)
 }
 
 var numbers = window.confirm ("Would you like to add Number ?")
 if (numbers=== true){
 // Add numbers to options
+options = options.concat(num) ;
 console.log(numbers)
+console.log(options)
 
 }
 
 var SpecialCharacters = window.confirm ("Would you like to add Special Characters ?")
 if (SpecialCharacters === true ) {
 // Add special Characters
+options = options.concat(sc) ;
 console.log (SpecialCharacters)
-
+console.log(options)
 }
+
+
 // w3 for loop arrays and generate password 
 
-
-
+var password = "";
+ for (var i = 0; i < passwordlink; i++){
+  var index = Math.floor(Math.random()* options.length);
+  password = password + options [index];
+ }
+return password ;
 
 }
-
 
 // Write password to the #password input
 function writePassword() {
